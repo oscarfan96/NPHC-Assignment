@@ -1,6 +1,6 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { UpdateEmployeeDto } from 'src/dto/employee.dto';
+import { GetAllEmployeesDto, UpdateEmployeeDto } from 'src/dto/employee.dto';
 import { DefaultResponse } from 'src/type/general';
 import { EmployeeService } from './employee.service';
 
@@ -11,12 +11,16 @@ export class EmployeeController {
 
   @Get()
   @HttpCode(HttpStatus.OK)
-  async getAllEmployee(): Promise<DefaultResponse> {
+  async getAllEmployee(@Query() query: GetAllEmployeesDto): Promise<DefaultResponse> {
+    
+    const employees = await this.employeeService.all({
+      minSalary: isNaN(Number(query.minSalary)) ? false : Number(query.minSalary),
+      maxSalary: isNaN(Number(query.maxSalary)) ? false : Number(query.maxSalary),
+    });
+
     return {
       isSuccess: true,
-      result: {
-        employees: await this.employeeService.all()
-      }
+      result: { employees }
     }
   }
 
@@ -29,7 +33,6 @@ export class EmployeeController {
 
     return {
       isSuccess: result.isSuccess,
-      errorMessage: result.errorMessage
     }
   }
 

@@ -33,8 +33,26 @@ export class EmployeeService {
     return employees;
   }
 
-  async all() {
-    return await this.employeeModel.find();
+  async all(filters: { minSalary: number | false, maxSalary: number | false }) {
+    const filter = {};
+
+    if (filters.minSalary !== false) {
+      if (!filter['salary']) {
+        filter['salary'] = { '$gte': filters.minSalary }
+      } else {
+        filter['salary']['$gte'] = filters.minSalary;
+      }
+    }
+
+    if (filters.maxSalary !== false) {
+      if (!filter['salary']) {
+        filter['salary'] = { '$lte': filters.maxSalary }
+      } else {
+        filter['salary']['$lte'] = filters.maxSalary;
+      }
+    }
+
+    return await this.employeeModel.find(filter);
   }
 
   async update(id: string, entities: { name: string, salary: number, login: string }) {
@@ -43,7 +61,7 @@ export class EmployeeService {
 
   async create(employees: Employee[]) {
     const session = await this.connection.startSession();
-    
+
     session.startTransaction();
     try {
       await this.employeeModel.collection.insertMany(employees);
@@ -52,8 +70,8 @@ export class EmployeeService {
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      return { isSuccess: false, errorMessage: error.toString()}
-    } 
+      throw error.toString();
+    }
     return { isSuccess: true };
   }
 

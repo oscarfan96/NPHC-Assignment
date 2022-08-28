@@ -1,12 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import EmployeeTable from './component/employee/table';
+import 'antd/dist/antd.css';
+import { Content } from 'antd/lib/layout/layout';
+import Employee from './content/employee';
+
 
 function App() {
   return (
     <div className="App">
-      <EmployeeTable />
+      <Content style={{ padding: '0 50px' }}>
+        <Employee></Employee>
+      </Content>
     </div>
   );
 }

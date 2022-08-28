@@ -1,4 +1,16 @@
-import { IsNumber, IsString } from "class-validator";
+import { IsNumber, IsNumberString, IsOptional, IsString } from "class-validator";
+
+export class GetAllEmployeesDto {
+
+  @IsOptional()
+  @IsNumberString()
+  minSalary?: number;
+
+  @IsOptional()
+  @IsNumberString()
+  maxSalary?: number;
+
+}
 
 export class UpdateEmployeeDto {
 
