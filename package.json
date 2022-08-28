@@ -1,0 +1,11 @@
+{
+  "name": "nphc-assignment",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docker:compose": "docker-compose up"
+  },
+  "author": "",
+  "license": "ISC"
+}

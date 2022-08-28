@@ -1,24 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import 'antd/dist/antd.css';
+import { Content } from 'antd/lib/layout/layout';
+import Employee from './content/employee';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Content style={{ padding: '0 50px' }}>
+        <Employee></Employee>
+      </Content>
     </div>
   );
 }
