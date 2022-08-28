@@ -3,7 +3,6 @@ import 'antd/dist/antd.css';
 import { useQueryClient } from "@tanstack/react-query";
 import { InboxOutlined } from '@ant-design/icons';
 import Upload, { RcFile, UploadChangeParam, UploadFile } from "antd/lib/upload";
-import { useState } from "react";
 
 const TITLE = 'Upload employees CSV files';
 
@@ -30,7 +29,7 @@ const UploadModal = (props: { isShow: boolean; closeModal: any }) => {
     }
 
     if (!isLt2M) {
-      message.error('Image must smaller than 2MB!');
+      message.error('File must smaller than 2MB!');
     }
     
     return isCSV && isLt2M;
@@ -38,7 +37,7 @@ const UploadModal = (props: { isShow: boolean; closeModal: any }) => {
 
   return (
     <Modal destroyOnClose={true} visible={props.isShow} onCancel={() => { props.closeModal(); }} title={TITLE} footer={null} width={1000}>
-      <Dragger beforeUpload={validateFile} name='file' multiple={true} method="post" action='http://localhost:3001/employees/upload' onChange={onUploadChange}>
+      <Dragger data-testid="upload-dragger" beforeUpload={validateFile} name='file' multiple={true} method="post" action='http://localhost:3001/employees/upload' onChange={onUploadChange}>
         <p className="ant-upload-drag-icon">
           <InboxOutlined />
         </p>

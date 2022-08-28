@@ -24,10 +24,10 @@ const EmployeeTableFilter = (props: Props) => {
 
   return <Form layout="vertical">
     <Form.Item label="Min Salary">
-      <Input placeholder="Min Salary" name="minSalary" value={props.filters.minSalary ?? undefined} onChange={handleChange} prefix={INPUT_PREFIX} suffix={INPUT_SUFFIX} />
+      <Input placeholder="Min Salary" name="minSalary" data-testid="input-min-salary" value={props.filters.minSalary ?? undefined} onChange={handleChange} prefix={INPUT_PREFIX} suffix={INPUT_SUFFIX} />
     </Form.Item>
     <Form.Item label="Max Salary">
-      <Input placeholder="Max Salary" name="maxSalary" value={props.filters.maxSalary ?? undefined} onChange={handleChange} prefix={INPUT_PREFIX} suffix={INPUT_SUFFIX} />
+      <Input placeholder="Max Salary" name="maxSalary" data-testid="input-max-salary" value={props.filters.maxSalary ?? undefined} onChange={handleChange} prefix={INPUT_PREFIX} suffix={INPUT_SUFFIX} />
     </Form.Item>
   </Form>
 }

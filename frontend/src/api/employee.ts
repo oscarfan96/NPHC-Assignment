@@ -12,6 +12,7 @@ export const getEmployees = async (filters: { minSalary?: number, maxSalary?: nu
       maxSalary: filters.maxSalary
     }
   });
+
   return response.data.result.employees;
 }
 

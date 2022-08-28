@@ -59,7 +59,7 @@ const EmployeeTable = (props: { employeesData: Employee[] | undefined }) => {
           key: 'action',
           render: (_: any, record: Employee) => {
             return (
-              <div><a onClick={() => showModal("EDIT", record)}>Edit </a>{'\n'}<a onClick={() => showModal("DELETE", record)}>Delete</a></div>
+              <div><a data-testid={`edit-btn-${record.id}`} onClick={() => showModal("EDIT", record)}>Edit </a>{'\n'}<a data-testid={`dlt-btn-${record.id}`} onClick={() => showModal("DELETE", record)}>Delete</a></div>
             )
           },
         },

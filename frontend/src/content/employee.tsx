@@ -28,7 +28,7 @@ const Employee = () => {
 
   return <><Title>Employees</Title>
     <EmployeeTableFilter filters={filters} setFilters={setFilters} />
-    <Button onClick={() => setIsShowUploadModal(true)} type="primary" block>Upload CSV</Button>
+    <Button data-testid="btn-upload-csv" onClick={() => setIsShowUploadModal(true)} type="primary" block>Upload CSV</Button>
     <EmployeeTable employeesData={employees} />
     <UploadModal isShow={isShowUploadModal} closeModal={() => setIsShowUploadModal(false)} />
   </>

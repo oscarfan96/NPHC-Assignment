@@ -26,7 +26,7 @@ const DeleteModal = (props: { employee: Employee, isShow: boolean; closeModal: a
   });
 
   return isError ? < Modal visible={isError} onOk={reset} onCancel={reset}> <p>Oops! Something went wrong.</p></Modal > :
-    <Modal title={TITLE} visible={props.isShow} onOk={() => mutate(props.employee.id)} confirmLoading={isLoading} onCancel={props.closeModal}>
+    <Modal data-testid="dlt-modal" title={TITLE} visible={props.isShow} onOk={() => mutate(props.employee.id)} confirmLoading={isLoading} onCancel={props.closeModal}>
       <p>{modalText}</p>
     </Modal >
 }

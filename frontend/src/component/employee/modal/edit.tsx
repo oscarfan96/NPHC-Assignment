@@ -40,16 +40,16 @@ const EmployeeModalEdit = (props: { employee: Employee, isShow: boolean; closeMo
   })
 
   return isError ? < Modal visible={isError} onOk={reset} onCancel={reset}> <p>Oops! Something went wrong.</p></Modal > :
-    <Modal title={TITLE} visible={props.isShow} okText={modalText} onOk={() => mutate(inputs)} confirmLoading={isLoading} onCancel={props.closeModal}>
+    <Modal data-testid="edit-modal" title={TITLE} visible={props.isShow} okText={modalText} onOk={() => mutate(inputs)} confirmLoading={isLoading} onCancel={props.closeModal}>
       <Form layout="vertical">
         <Form.Item label="Name">
-          <Input placeholder="name" name="name" value={inputs.name} onChange={handleChange} />
+          <Input data-testid="input-name" placeholder="name" name="name" value={inputs.name} onChange={handleChange} />
         </Form.Item>
         <Form.Item label="Login">
-          <Input placeholder="login" name="login" value={inputs.login} onChange={handleChange} />
+          <Input data-testid="input-login" placeholder="login" name="login" value={inputs.login} onChange={handleChange} />
         </Form.Item>
         <Form.Item label="Salary">
-          <Input type="number" placeholder="salary" name="salary" value={inputs.salary} onChange={handleChange} />
+          <Input data-testid="input-salary" type="number" placeholder="salary" name="salary" value={inputs.salary} onChange={handleChange} />
         </Form.Item>
       </Form>
     </Modal >
