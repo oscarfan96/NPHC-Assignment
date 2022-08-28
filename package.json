@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docker:compose": "docker-compose up"
+    "start": "docker-compose up"
   },
   "author": "",
   "license": "ISC"

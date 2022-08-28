@@ -10,7 +10,7 @@ services:
     ports:
       - 3001:3001
     environment:
-      MONGODB_URI: mongodb://mongo:27017/NHCP
+      MONGODB_URI: mongodb://mongo:27017/NPHC
     volumes:
       - /usr/src/app/node_modules
       - ./backend:/usr/src/app
@@ -37,13 +37,13 @@ services:
 
   mongo:
     image: mongo:latest
-    container_name: NHCP-mongo
+    container_name: NPHC-mongo
     restart:
       always
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_DATABASE: NHCP
+      MONGO_INITDB_DATABASE: NPHC
     volumes:
       - dbdata:/data/db
 
