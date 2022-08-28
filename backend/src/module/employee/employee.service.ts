@@ -64,13 +64,15 @@ export class EmployeeService {
 
     session.startTransaction();
     try {
-      await this.employeeModel.collection.insertMany(employees);
+      await Promise.all(employees.map((employee)=>{
+        return this.employeeModel.collection.updateOne({ id: employee.id }, { $set: employee }, { upsert: true });
+      }));
       await session.commitTransaction();
       await session.endSession();
     } catch (error) {
       await session.abortTransaction();
       await session.endSession();
-      throw error.toString();
+      return {isSuccess: false, message: error.toString()};
     }
     return { isSuccess: true };
   }

@@ -1,8 +1,9 @@
-import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Post, Put, Query, Res, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { GetAllEmployeesDto, UpdateEmployeeDto } from 'src/dto/employee.dto';
 import { DefaultResponse } from 'src/type/general';
 import { EmployeeService } from './employee.service';
+import { Response } from 'express';
 
 @Controller('employees')
 export class EmployeeController {
@@ -25,15 +26,22 @@ export class EmployeeController {
   }
 
   @Post('upload')
-  @HttpCode(HttpStatus.CREATED)
   @UseInterceptors(FileInterceptor('file'))
-  async uploadEmployeeFile(@UploadedFile() file: Express.Multer.File): Promise<DefaultResponse> {
+  async uploadEmployeeFile(@Res() res: Response,@UploadedFile() file: Express.Multer.File){
+    if(file.mimetype !== 'text/csv'){
+      return res.status(HttpStatus.BAD_REQUEST).json({
+        isSuccess: false,
+        message: 'Invalid file type'
+      });
+    }
+
     const employees = await this.employeeService.convertBufferToJSON(file.buffer);
     const result = await this.employeeService.create(employees);
 
-    return {
+    return res.status(HttpStatus.CREATED).json({
       isSuccess: result.isSuccess,
-    }
+      message: result.message,
+    });
   }
 
   @Put(':id')
